@@ -31,8 +31,23 @@ app.post("/login", (request, response) => {
 
 app.post("/logout", (request, response) => {
   response.json({
-    logoutMessage: "User has been logged out successfully (mock).",
+    logoutMessage: "User has been logged out successfully.",
   });
 });
 
 app.listen(3000, () => console.log("Backend running on http://localhost:3000"));
+
+//Test in PowerShell
+
+// login 
+
+/* 
+   Invoke-RestMethod -Method Post http://localhost:3000/login `
+    -ContentType "application/json" `
+    -Body '{"userName":"User"}'
+
+// logout 
+
+   Invoke-RestMethod -Method Post http://localhost:3000/logout
+
+*/
