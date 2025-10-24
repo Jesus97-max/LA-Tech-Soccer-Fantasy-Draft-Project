@@ -6,6 +6,7 @@ import TeamDisplay from './Pages/TeamDisplay.jsx';
 import {HashRouter as Router, Routes, Route} from 'react-router-dom'; 
 
 function App() {
+ 
   return (
     <Router>
       <Routes> 

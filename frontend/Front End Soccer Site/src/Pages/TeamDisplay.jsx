@@ -1,3 +1,4 @@
+ import {playerList, selected} from '../global.js';
 function TeamDisplay(){
     return(
         <>

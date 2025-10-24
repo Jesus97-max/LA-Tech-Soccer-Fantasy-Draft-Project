@@ -1,3 +1,5 @@
+ import { roundCounter, playerList, athleteList, selected } from '../global.js';
+
 function UserChoice(){
     return(
         <>
