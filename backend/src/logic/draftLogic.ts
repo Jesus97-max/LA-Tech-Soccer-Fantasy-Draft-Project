@@ -1,6 +1,5 @@
-
 //Type Definitions
-type Player = {
+export type Player = {
   id: string;
   name: string;
   position: string;
@@ -8,13 +7,13 @@ type Player = {
   club: string;
 };
 
-type Participant = {
+export type Participant = {
   participantId: string;
   teamId: string;
   order: number;
 };
 
-type DraftGameState = {
+export type DraftGameState = {
   currentRound: number;
   currentParticipantIndex: number;
   participants: Participant[];
@@ -29,14 +28,18 @@ let draftGameState: DraftGameState = {
     { participantId: "user1", teamId: "team1", order: 0 },
     { participantId: "user2", teamId: "team2", order: 1 },
   ],
-  selectedPlayerIds: new Set(),
+  selectedPlayerIds: new Set<string>(),
 };
 
 //Functions
 
 //Returns the participant whose turn it currently is
 export function getCurrentParticipant(): Participant {
-  return draftGameState.participants[draftGameState.currentParticipantIndex];
+  const participant = draftGameState.participants[draftGameState.currentParticipantIndex];
+  if (!participant) {
+    throw new Error("Current participant not found");
+  }
+  return participant;
 }
 
 //Picks a player for the current participant
@@ -57,7 +60,6 @@ export function pickPlayer(playerUniqueId: string) {
 export function moveToNextTurn() {
   draftGameState.currentParticipantIndex++;
 
-  //If we've reached the end of the participants list, start a new round
   if (draftGameState.currentParticipantIndex >= draftGameState.participants.length) {
     draftGameState.currentParticipantIndex = 0;
     draftGameState.currentRound++;
@@ -65,7 +67,7 @@ export function moveToNextTurn() {
 }
 
 //Returns the current overall state of the draft
-export function getDraftState() {
+export function getDraftState(): DraftGameState {
   return draftGameState;
 }
 
@@ -75,6 +77,6 @@ export function resetDraftGame(newParticipants: Participant[]) {
     currentRound: 1,
     currentParticipantIndex: 0,
     participants: newParticipants.sort((a, b) => a.order - b.order),
-    selectedPlayerIds: new Set(),
+    selectedPlayerIds: new Set<string>(),
   };
 }

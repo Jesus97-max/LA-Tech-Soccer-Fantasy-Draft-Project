@@ -1,6 +1,7 @@
 import express from "express";
 import draftRouter from "./routes/draft";
 
+
 const app = express();
 app.use(express.json());
 
