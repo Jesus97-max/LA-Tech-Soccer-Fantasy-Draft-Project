@@ -1,4 +1,5 @@
 import express from "express";
+import draftRouter from "./routes/draft";
 
 const app = express();
 app.use(express.json());
@@ -34,6 +35,11 @@ app.post("/logout", (request, response) => {
     logoutMessage: "User has been logged out successfully.",
   });
 });
+
+app.listen(3000, () => console.log("Backend running on http://localhost:3000"));
+
+// Draft Routes
+app.use("/draft", draftRouter);
 
 app.listen(3000, () => console.log("Backend running on http://localhost:3000"));
 
