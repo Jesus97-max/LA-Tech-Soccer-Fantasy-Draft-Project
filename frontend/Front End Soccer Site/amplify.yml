@@ -11,7 +11,7 @@
 
 version: 1
 applications:
-  - appRoot: frontend/Front End Soccer Site
+  - appRoot: "frontend/Front End Soccer Site"
     frontend:
       phases:
         preBuild:
