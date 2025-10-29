@@ -1,0 +1,29 @@
+# -------------------------------------------------------------
+# AWS Amplify Build Configuration
+# -------------------------------------------------------------
+# This file tells AWS Amplify how to build and deploy the app.
+# - appRoot: specifies where the frontend project lives
+# - preBuild: installs dependencies (npm ci)
+# - build: runs the frontend build command (npm run build)
+# - artifacts: points Amplify to the folder with built files (dist)
+# - cache: speeds up future builds by caching node_modules
+# -------------------------------------------------------------
+
+version: 1
+applications:
+  - appRoot: frontend/Front End Soccer Site
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - npm ci
+        build:
+          commands:
+            - npm run build
+      artifacts:
+        baseDirectory: dist
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - node_modules/**/*
