@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "framework": { "name": "express" },
+  "routes": [
+    { "path": "/*", "target": { "kind": "Compute", "src": "default" } }
+  ],
+  "computeResources": [
+    {
+      "name": "default",
+      "runtime": "nodejs22.x",
+      "entrypoint": "index.js"
+    }
+  ]
+}
+
+

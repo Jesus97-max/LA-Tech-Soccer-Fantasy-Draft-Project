@@ -1,19 +1,22 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "dev": "tsx watch src/index.ts"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "private": true,
   "description": "",
+  "main": "dist/index.js",
+  "license": "ISC",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "serve": "node dist/index.js",
+    "postbuild": "chmod +x bin/postbuild.sh && ./bin/postbuild.sh"
+  },
   "dependencies": {
     "express": "^5.1.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
+    "@types/node": "^22.7.4",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3"
   }
