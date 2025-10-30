@@ -3,6 +3,14 @@ import express from "express";
 const app = express();
 app.use(express.json());
 
+// Use the PORT Amplify gives us (fallback 3000 for local dev)
+const port = process.env.PORT ? Number(process.env.PORT) : 3000;
+
+// Basic root + health routes
+app.get("/", (_req, res) => {
+  res.json({ ok: true, msg: "Express is alive on Amplify" });
+});
+
 app.get("/health", (_req, res) => {
   res.json({ ok: true });
 });
