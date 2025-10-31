@@ -1,6 +1,8 @@
 # Run in terminal from root dir: uvicorn backend.src.data.main:app --host 127.0.0.1 --port 8000
 from fastapi import FastAPI
+from mangum import Mangum
 from backend.src.data.championsLeagueAPI import ChampionsLeague
+
 
 app = FastAPI()
 
@@ -30,6 +32,7 @@ def get_teams():
     teams_data = teams_df.to_dict(orient="records")
     return teams_data
 
+handler = Mangum(app)
 
 # Optional: for testing locally (e.g., python main.py)
 if __name__ == "__main__":
