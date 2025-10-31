@@ -1,11 +1,13 @@
 import pandas as pd
 import requests
 
+# Definition of the ChampionsLeague class
 class ChampionsLeague:
 
     player_columns = ["name", "player_image", "player_id", "age", "birthDate", "gender","weight","height","position","country_code", "team_name", "team_logo", "minutes_played_official", "matches_appearance", "goals", "assists", "distance_covered", "top_speed"]
     team_columns = ["team_name", 'team_logo', 'team_code']
 
+    # Declaration of the constructor
     def __init__(self, players_to_retrieve = 1, page_number = 0, player_df = None, team_df = None):
         self.players_to_retrieve = players_to_retrieve
         self.page_number = page_number
@@ -17,7 +19,8 @@ class ChampionsLeague:
         if team_df is None:
             team_df = pd.DataFrame(columns = self.team_columns)
         self.team_df = team_df
-        
+
+    # Method to retrieve data from the API    
     def retrieve_data(self):
         
         headers ={
@@ -31,6 +34,7 @@ class ChampionsLeague:
 
         return data
     
+    # Method to extract relevant information from the retrieved data
     def extract_info(self, data): 
         
         for i, n in enumerate(data):
@@ -191,11 +195,12 @@ class ChampionsLeague:
                 self.player_df.loc[len(self.player_df)] = player_info
                 self.team_df.loc[len(self.team_df)] = team_info
             except Exception as e:
-                #print(f"Error processing player at index {i}: {e}")
+                print(f"Error processing player at index {i}: {e}")
                 continue
 
         return self.player_df, self.team_df
     
+    # Method to clean the dataframes by removing duplicates
     def clean(self):
         self.player_df.drop_duplicates(inplace = True)
         self.team_df.drop_duplicates(inplace = True)
