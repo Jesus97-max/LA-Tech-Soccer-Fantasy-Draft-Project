@@ -1,7 +1,7 @@
 // Counting the amount of rounds we have
 export const roundCounter = 5;
 
-// Declaring Athelete Class
+// Declaring Athlete Class
 export class Athlete {
   constructor(statOne, statTwo, statThree, statFour, pointCost, id) {
     this.statOne = statOne;

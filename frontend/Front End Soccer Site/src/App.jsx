@@ -3,10 +3,10 @@ import Login from './Pages/Login.jsx';
 import Waiting from './Pages/Waiting.jsx';
 import UserChoice from './Pages/UserChoice.jsx';
 import TeamDisplay from './Pages/TeamDisplay.jsx';
-import {HashRouter as Router, Routes, Route} from 'react-router-dom'; 
+import {HashRouter as Router, Routes, Route} from 'react-router-dom';  
 
 function App() {
- 
+
   return (
     <Router>
       <Routes> 
