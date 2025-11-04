@@ -1,4 +1,6 @@
 import express from "express";
+import draftRouter from "./routes/draft";
+
 
 const app = express();
 app.use(express.json());
@@ -46,6 +48,11 @@ app.post("/logout", (request, response) => {
 app.listen(port, "0.0.0.0", () => {
   console.log(`Backend running on port ${port}`);
 });
+
+// Draft Routes
+app.use("/draft", draftRouter);
+
+app.listen(3000, () => console.log("Backend running on http://localhost:3000"));
 
 //Test in PowerShell
 
