@@ -43,7 +43,9 @@ app.post("/logout", (request, response) => {
   });
 });
 
-app.listen(3000, () => console.log("Backend running on http://localhost:3000"));
+app.listen(port, "0.0.0.0", () => {
+  console.log(`Backend running on port ${port}`);
+});
 
 //Test in PowerShell
 
