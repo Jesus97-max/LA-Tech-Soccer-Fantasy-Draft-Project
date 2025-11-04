@@ -1,0 +1,429 @@
+[
+  {
+    "id": "250088061",
+    "name": "Achraf Hakimi",
+    "position": "DEFENDER",
+    "cost": 11.5,
+    "club": "Paris Saint-Germain"
+  },
+  {
+    "id": "250064064",
+    "name": "Marquinhos",
+    "position": "DEFENDER",
+    "cost": 8.0,
+    "club": "Paris Saint-Germain"
+  },
+  {
+    "id": "250078922",
+    "name": "Gianluigi Donnarumma",
+    "position": "GOALKEEPER",
+    "cost": 8.0,
+    "club": "Paris Saint-Germain"
+  },
+  {
+    "id": "250066886",
+    "name": "Ousmane Dembélé",
+    "position": "FORWARD",
+    "cost": 13.8,
+    "club": "Paris Saint-Germain"
+  },
+  {
+    "id": "97746",
+    "name": "Yann Sommer",
+    "position": "GOALKEEPER",
+    "cost": 8.0,
+    "club": "FC Internazionale Milano"
+  },
+  {
+    "id": "250070417",
+    "name": "Joshua Kimmich",
+    "position": "MIDFIELDER",
+    "cost": 9.8,
+    "club": "FC Bayern München"
+  },
+  {
+    "id": "250076574",
+    "name": "Kylian Mbappé",
+    "position": "FORWARD",
+    "cost": 12.1,
+    "club": "Real Madrid C.F."
+  },
+  {
+    "id": "250023009",
+    "name": "Leandro Trossard",
+    "position": "MIDFIELDER",
+    "cost": 9.9,
+    "club": "Arsenal FC"
+  },
+  {
+    "id": "74699",
+    "name": "Luka Modrić",
+    "position": "MIDFIELDER",
+    "cost": 8.6,
+    "club": "Real Madrid C.F."
+  },
+  {
+    "id": "250028211",
+    "name": "Antonio Rüdiger",
+    "position": "DEFENDER",
+    "cost": 9.0,
+    "club": "Real Madrid C.F."
+  },
+  {
+    "id": "250016833",
+    "name": "Harry Kane",
+    "position": "FORWARD",
+    "cost": 14.1,
+    "club": "FC Bayern München"
+  },
+  {
+    "id": "250002096",
+    "name": "Robert Lewandowski",
+    "position": "FORWARD",
+    "cost": 13.5,
+    "club": "FC Barcelona"
+  },
+  {
+    "id": "250046522",
+    "name": "Julian Brandt",
+    "position": "MIDFIELDER",
+    "cost": 9.2,
+    "club": "Borussia Dortmund"
+  },
+  {
+    "id": "98023",
+    "name": "Henrikh Mkhitaryan",
+    "position": "MIDFIELDER",
+    "cost": 8.3,
+    "club": "FC Internazionale Milano"
+  },
+  {
+    "id": "50327423",
+    "name": "Frenkie de Jong",
+    "position": "MIDFIELDER",
+    "cost": 8.0,
+    "club": "FC Barcelona"
+  },
+  {
+    "id": "250063984",
+    "name": "Leroy Sané",
+    "position": "MIDFIELDER",
+    "cost": 8.5,
+    "club": "FC Bayern München"
+  },
+  {
+    "id": "250011668",
+    "name": "Thibaut Courtois",
+    "position": "GOALKEEPER",
+    "cost": 8.0,
+    "club": "Real Madrid C.F."
+  },
+  {
+    "id": "250064188",
+    "name": "Hans Vanaken",
+    "position": "MIDFIELDER",
+    "cost": 8.8,
+    "club": "Club Brugge KV"
+  },
+  {
+    "id": "250017040",
+    "name": "Nicolás Otamendi",
+    "position": "DEFENDER",
+    "cost": 8.5,
+    "club": "SL Benfica"
+  },
+  {
+    "id": "250053044",
+    "name": "Brandon Mechele",
+    "position": "DEFENDER",
+    "cost": 8.0,
+    "club": "Club Brugge KV"
+  },
+  {
+    "id": "98078",
+    "name": "Simon Mignolet",
+    "position": "GOALKEEPER",
+    "cost": 8.0,
+    "club": "Club Brugge KV"
+  },
+  {
+    "id": "250026721",
+    "name": "Emiliano Martínez",
+    "position": "GOALKEEPER",
+    "cost": 8.0,
+    "club": "Aston Villa FC"
+  },
+  {
+    "id": "250064006",
+    "name": "Youri Tielemans",
+    "position": "MIDFIELDER",
+    "cost": 9.9,
+    "club": "Aston Villa FC"
+  },
+  {
+    "id": "250017824",
+    "name": "Emre Can",
+    "position": "DEFENDER",
+    "cost": 9.3,
+    "club": "Borussia Dortmund"
+  },
+  {
+    "id": "250005343",
+    "name": "Luuk de Jong",
+    "position": "FORWARD",
+    "cost": 9.3,
+    "club": "PSV Eindhoven"
+  },
+  {
+    "id": "250086316",
+    "name": "Thomas Partey",
+    "position": "MIDFIELDER",
+    "cost": 8.0,
+    "club": "Arsenal FC"
+  },
+  {
+    "id": "250041771",
+    "name": "Leon Goretzka",
+    "position": "MIDFIELDER",
+    "cost": 8.8,
+    "club": "FC Bayern München"
+  },
+  {
+    "id": "250022829",
+    "name": "Hakan Çalhanoğlu",
+    "position": "MIDFIELDER",
+    "cost": 10.6,
+    "club": "FC Internazionale Milano"
+  },
+  {
+    "id": "250041770",
+    "name": "Serge Gnabry",
+    "position": "FORWARD",
+    "cost": 8.9,
+    "club": "FC Bayern München"
+  },
+  {
+    "id": "250003318",
+    "name": "Thomas Müller",
+    "position": "FORWARD",
+    "cost": 9.8,
+    "club": "FC Bayern München"
+  },
+  {
+    "id": "250101144",
+    "name": "Walter Benítez",
+    "position": "GOALKEEPER",
+    "cost": 8.0,
+    "club": "PSV Eindhoven"
+  },
+  {
+    "id": "250079545",
+    "name": "Dayot Upamecano",
+    "position": "DEFENDER",
+    "cost": 8.3,
+    "club": "FC Bayern München"
+  },
+  {
+    "id": "250040471",
+    "name": "Iñigo Martínez",
+    "position": "DEFENDER",
+    "cost": 9.3,
+    "club": "FC Barcelona"
+  },
+  {
+    "id": "250068808",
+    "name": "Olivier Boscagli",
+    "position": "DEFENDER",
+    "cost": 8.0,
+    "club": "PSV Eindhoven"
+  },
+  {
+    "id": "250024349",
+    "name": "Marcel Sabitzer",
+    "position": "MIDFIELDER",
+    "cost": 8.0,
+    "club": "Borussia Dortmund"
+  },
+  {
+    "id": "250081341",
+    "name": "Martin Ødegaard",
+    "position": "MIDFIELDER",
+    "cost": 9.8,
+    "club": "Arsenal FC"
+  },
+  {
+    "id": "250054949",
+    "name": "Kingsley Coman",
+    "position": "FORWARD",
+    "cost": 8.5,
+    "club": "FC Bayern München"
+  },
+  {
+    "id": "250012069",
+    "name": "Jan Oblak",
+    "position": "GOALKEEPER",
+    "cost": 8.0,
+    "club": "Atlético de Madrid"
+  },
+  {
+    "id": "250014042",
+    "name": "Callum McGregor",
+    "position": "MIDFIELDER",
+    "cost": 8.0,
+    "club": "Celtic FC"
+  },
+  {
+    "id": "250055660",
+    "name": "Jonathan Tah",
+    "position": "DEFENDER",
+    "cost": 8.0,
+    "club": "Bayer 04 Leverkusen"
+  },
+  {
+    "id": "74954",
+    "name": "Kasper Schmeichel",
+    "position": "GOALKEEPER",
+    "cost": 8.0,
+    "club": "Celtic FC"
+  },
+  {
+    "id": "250014709",
+    "name": "Marten de Roon",
+    "position": "MIDFIELDER",
+    "cost": 8.3,
+    "club": "Atalanta BC"
+  },
+  {
+    "id": "250042422",
+    "name": "Alejandro Grimaldo",
+    "position": "DEFENDER",
+    "cost": 9.6,
+    "club": "Bayer 04 Leverkusen"
+  },
+  {
+    "id": "250076126",
+    "name": "Theo Hernández",
+    "position": "DEFENDER",
+    "cost": 8.0,
+    "club": "AC Milan"
+  },
+  {
+    "id": "250042780",
+    "name": "Mike Maignan",
+    "position": "GOALKEEPER",
+    "cost": 8.0,
+    "club": "AC Milan"
+  },
+  {
+    "id": "250055663",
+    "name": "Thilo Kehrer",
+    "position": "DEFENDER",
+    "cost": 9.1,
+    "club": "AS Monaco"
+  },
+  {
+    "id": "97923",
+    "name": "Manuel Neuer",
+    "position": "GOALKEEPER",
+    "cost": 8.0,
+    "club": "FC Bayern München"
+  },
+  {
+    "id": "250004721",
+    "name": "Granit Xhaka",
+    "position": "MIDFIELDER",
+    "cost": 8.0,
+    "club": "Bayer 04 Leverkusen"
+  },
+  {
+    "id": "250064274",
+    "name": "Breel Embolo",
+    "position": "FORWARD",
+    "cost": 9.4,
+    "club": "AS Monaco"
+  },
+  {
+    "id": "250019498",
+    "name": "Antoine Griezmann",
+    "position": "FORWARD",
+    "cost": 11.9,
+    "club": "Atlético de Madrid"
+  },
+  {
+    "id": "250086789",
+    "name": "Edimilson Fernandes",
+    "position": "MIDFIELDER",
+    "cost": 8.5,
+    "club": "Stade Brestois 29"
+  },
+  {
+    "id": "250042631",
+    "name": "Mario Pašalić",
+    "position": "MIDFIELDER",
+    "cost": 9.5,
+    "club": "Atalanta BC"
+  },
+  {
+    "id": "250024370",
+    "name": "Piotr Zieliński",
+    "position": "MIDFIELDER",
+    "cost": 8.3,
+    "club": "FC Internazionale Milano"
+  },
+  {
+    "id": "250040521",
+    "name": "Lucas Vázquez",
+    "position": "DEFENDER",
+    "cost": 8.8,
+    "club": "Real Madrid C.F."
+  },
+  {
+    "id": "103806",
+    "name": "Matteo Darmian",
+    "position": "DEFENDER",
+    "cost": 8.0,
+    "club": "FC Internazionale Milano"
+  },
+  {
+    "id": "250005335",
+    "name": "İlkay Gündoğan",
+    "position": "MIDFIELDER",
+    "cost": 9.0,
+    "club": "Manchester City"
+  },
+  {
+    "id": "50327420",
+    "name": "Virgil van Dijk",
+    "position": "DEFENDER",
+    "cost": 8.5,
+    "club": "Liverpool FC"
+  },
+  {
+    "id": "250006714",
+    "name": "Marco Bizot",
+    "position": "GOALKEEPER",
+    "cost": 8.0,
+    "club": "Stade Brestois 29"
+  },
+  {
+    "id": "250052469",
+    "name": "Mohamed Salah",
+    "position": "FORWARD",
+    "cost": 10.7,
+    "club": "Liverpool FC"
+  },
+  {
+    "id": "250052957",
+    "name": "Francesco Acerbi",
+    "position": "DEFENDER",
+    "cost": 8.8,
+    "club": "FC Internazionale Milano"
+  },
+  {
+    "id": "250059115",
+    "name": "Bernardo Silva",
+    "position": "MIDFIELDER",
+    "cost": 8.0,
+    "club": "Manchester City"
+  }
+]

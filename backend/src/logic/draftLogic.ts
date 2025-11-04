@@ -1,6 +1,6 @@
 // Type Definitions
 export type Player = {
-  id: string;
+  id: string | number; // allow numbers coming from JSON, we normalize later
   name: string;
   position: string;
   cost: number;
@@ -18,9 +18,13 @@ export type DraftGameState = {
   currentRound: number;
   currentParticipantIndex: number;
   participants: Participant[];
-  selectedPlayerIds: Set<string>;
+  selectedPlayerIds: Set<string>; // always store as normalized string
   availablePlayers: Player[]; // Ruby add
 };
+
+// --- Utils ---
+const normalizeId = (id: string | number | undefined | null): string =>
+  String(id ?? "").trim();
 
 // Global Game State
 let draftGameState: DraftGameState = {
@@ -52,13 +56,16 @@ export function pickPlayer(playerUniqueId: string) {
     return { success: false, message: "Player ID is missing." };
   }
 
-  if (draftGameState.selectedPlayerIds.has(playerUniqueId)) {
+  // normalize inputs to avoid string/number or whitespace mismatches
+  const normalized = normalizeId(playerUniqueId);
+
+  if (draftGameState.selectedPlayerIds.has(normalized)) {
     return { success: false, message: "Player has already been picked." };
   }
 
-  // add player to current participant's team
+  // find by normalized id
   const player = draftGameState.availablePlayers.find(
-    (p) => p.id === playerUniqueId
+    (p) => normalizeId(p.id) === normalized
   );
 
   if (!player) {
@@ -68,7 +75,7 @@ export function pickPlayer(playerUniqueId: string) {
   const currentParticipant = getCurrentParticipant();
   currentParticipant.team.push(player);
 
-  draftGameState.selectedPlayerIds.add(playerUniqueId);
+  draftGameState.selectedPlayerIds.add(normalized);
   return { success: true, message: "Player successfully picked!" };
 }
 
@@ -133,6 +140,6 @@ export function setAvailablePlayers(players: Player[]) {
 // Returns only the players who haven't been picked yet
 export function getAvailablePlayers(): Player[] {
   return draftGameState.availablePlayers.filter(
-    (player) => !draftGameState.selectedPlayerIds.has(player.id)
+    (player) => !draftGameState.selectedPlayerIds.has(normalizeId(player.id))
   );
 }

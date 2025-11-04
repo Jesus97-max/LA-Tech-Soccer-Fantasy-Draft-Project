@@ -12,6 +12,7 @@
 
     /* Node.js compatibility */
     "esModuleInterop": true,
+    "resolveJsonModule": true,           // ✅ NEW: allow importing JSON
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
 
@@ -21,6 +22,11 @@
     /* For debugging */
     "sourceMap": true
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src/**/*.ts", "src/**/*.json"],   // ✅ include JSON files
+  "exclude": [
+    "node_modules",
+    "dist",
+    "src/**/*.py",                     // ✅ ignore python
+    "src/**/requirements.txt"          // ✅ ignore requirements files
+  ]
 }
