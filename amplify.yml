@@ -1,17 +1,13 @@
-# -------------------------------------------------------------
-# AWS Amplify Build Configuration
-# -------------------------------------------------------------
-# This file tells AWS Amplify how to build and deploy the app.
-# - appRoot: specifies where the frontend project lives
-# - preBuild: installs dependencies (npm ci)
-# - build: runs the frontend build command (npm run build)
-# - artifacts: points Amplify to the folder with built files (dist)
-# - cache: speeds up future builds by caching node_modules
-# -------------------------------------------------------------
+# ==============================================
+# AWS Amplify Build Configuration (monorepo)
+# Frontend: Vite -> dist
+# Backend: Express/TypeScript server on Node 20
+# ==============================================
 
 version: 1
 applications:
-  - appRoot: "frontend/Front End Soccer Site"
+  # ---------- FRONTEND ----------
+  - appRoot: frontend/Front End Soccer Site
     frontend:
       phases:
         preBuild:
@@ -21,9 +17,37 @@ applications:
           commands:
             - npm run build
       artifacts:
-        baseDirectory: dist
+        baseDirectory: dist        # Vite output confirmed
         files:
           - '**/*'
       cache:
         paths:
           - node_modules/**/*
+    env:
+      variables:
+        NODE_ENV: production
+
+  # ---------- BACKEND ----------
+  - appRoot: backend
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - npm ci
+        build:
+          commands:
+            - npm run build         # compiles TS -> dist
+      artifacts:
+        files:
+          - '**/*'                  # required by schema
+      cache:
+        paths:
+          - node_modules/**/*
+    server:
+      command: 'npm start'          # must run: node dist/server.js
+      framework: 'express'
+      path: '/'
+      runtime: 'nodejs20.x'
+    env:
+      variables:
+        NODE_ENV: production
