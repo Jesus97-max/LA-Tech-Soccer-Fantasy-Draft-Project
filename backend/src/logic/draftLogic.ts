@@ -57,9 +57,13 @@ export function pickPlayer(playerUniqueId: string) {
 
 // add player to current participants team
   const player = draftGameState.availablePlayers.find(p => p.id === playerUniqueId);
+
   if (!player) {
     return { success: false, message: "Player not found." };
   }
+
+  const currentParticipant = getCurrentParticipant();
+  currentParticipant.team.push(player);
 
   draftGameState.selectedPlayerIds.add(playerUniqueId);
   return { success: true, message: "Player successfully picked!" };
@@ -114,3 +118,9 @@ export function setAvailablePlayers(players: Player[]) {
   draftGameState.availablePlayers = players;
 }
 
+//Returns only the players who haven't been picked yet
+export function getAvailablePlayers(): Player[] {
+  return draftGameState.availablePlayers.filter(
+    player => !draftGameState.selectedPlayerIds.has(player.id)
+  );
+}
