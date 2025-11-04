@@ -54,6 +54,11 @@ app.use("/draft", draftRouter);
 
 app.listen(3000, () => console.log("Backend running on http://localhost:3000"));
 
+// Draft Routes
+app.use("/draft", draftRouter);
+
+app.listen(3000, () => console.log("Backend running on http://localhost:3000"));
+
 //Test in PowerShell
 
 // login 
