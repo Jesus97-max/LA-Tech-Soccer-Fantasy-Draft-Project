@@ -4,10 +4,28 @@ import { playerList, athleteList, roundCounter, selected } from "../global.js";
 
 
 function UserChoice(){
+
+    const [selectedAthlete, setSelectedAthlete] = useState(null);
+
     return(
         <div className="player-select-page">
             <div className='status-container'>
                 <pre> Current Round: {roundCounter}                                           Points Left: </pre>
+            </div>
+
+            <div className='status-container'>
+                <div style={{ marginTop: '10px', fontWeight: 'bold' }}>
+                {selectedAthlete ? (
+                <div>
+                <div>Selected Player: {selectedAthlete.name || `Player ${selectedAthlete.id}`}</div>
+                <div>Stat 1: {selectedAthlete.statOne}</div>
+                <div>Stat 2: {selectedAthlete.statTwo}</div>
+                <div>Stat 3: {selectedAthlete.statThree}</div>
+                <div>Stat 4: {selectedAthlete.statFour}</div>
+                <div>Points Cost: {selectedAthlete.pointCost}</div>
+                </div>
+                ) : ("No athlete selected")}
+                </div>
             </div>
 
             <h2>Available Athletes</h2>
