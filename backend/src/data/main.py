@@ -1,40 +1,53 @@
-# Run in terminal from root dir: uvicorn backend.src.data.main:app --host 127.0.0.1 --port 8000
+import os
+import json
 from fastapi import FastAPI
 from mangum import Mangum
-from backend.src.data.championsLeagueAPI import ChampionsLeague
-
+from championsLeagueAPI import ChampionsLeague  # same folder
 
 app = FastAPI()
 
-# Load data once when the app starts
-players = int(input("Please input the amount of players to retrieve: "))
-page = int(input("What page to start retrieving players: "))
+# constants / defaults
+PLAYERS = int(os.environ.get("PLAYERS", 200))
+PAGE = int(os.environ.get("PAGE", 0))
 
-cl_request = ChampionsLeague(players, page)
-data = cl_request.retrieve_data()
-cl_request.extract_info(data)
+# load and prepare data once when Lambda cold-starts
+cl = ChampionsLeague(players_to_retrieve=PLAYERS, page_number=PAGE)
+data = cl.retrieve_data()
+cl.extract_info(data)
+players_df, teams_df = cl.clean()
 
-players_df, teams_df = cl_request.clean()
-
+def to_cost(row: dict) -> float:
+    g = row.get("goals") or 0
+    a = row.get("assists") or 0
+    try:
+        return round(8 + 0.5 * float(g) + 0.3 * float(a), 1)
+    except Exception:
+        return 8.0
 
 @app.get("/players")
 def get_players():
-    print("Accessing /players endpoint")
-    print(f"Number of players: {len(players_df)}")
-    players_data = players_df.to_dict(orient="records")
-    return players_data
-
+    """Return player data."""
+    records = [
+        {
+            "id": str(r.get("player_id")),
+            "name": r.get("name") or "",
+            "position": r.get("position") or "UNK",
+            "cost": to_cost(r),
+            "club": r.get("team_name") or "",
+        }
+        for _, r in players_df.iterrows()
+    ]
+    return records
 
 @app.get("/teams")
 def get_teams():
-    print("Accessing /teams endpoint")
-    print(f"Number of teams: {len(teams_df)}")
-    teams_data = teams_df.to_dict(orient="records")
-    return teams_data
+    """Return team data."""
+    return teams_df.to_dict(orient="records")
 
+# entry point for AWS Lambda
 handler = Mangum(app)
 
-# Optional: for testing locally (e.g., python main.py)
+# local dev support
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=False)
