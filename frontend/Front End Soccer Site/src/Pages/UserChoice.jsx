@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import { playerList, athleteList, roundCounter, selected } from "../global.js";
-//import mockAthletes from '../mockPlayers.jsx';
-
+//import { playerList, athleteList, roundCounter, selected } from "../global.js";
+import './userchoice.css';
 const API_URL = 'http://localhost:3000/draft';
 
 function UserChoice(){
@@ -117,21 +116,28 @@ function UserChoice(){
     return(
         <div className="player-select-page">
             <div className='status-container'>
-                <pre> Current Round: {currentRound}                                           Points Left: </pre>
+                <div style={{ fontSize: '1.1rem', fontWeight: '600' }}>
+                Current Round: {currentRound}
+                </div>
+                <div style={{ fontSize: '1.1rem', fontWeight: '600' }}>
+                    Points Left: {pointsLeft}
+                </div>
             </div>
 
-           <div className='status-container'>
-                <div style={{ marginTop: '10px', fontWeight: 'bold' }}>
-                    <div>Your Team ({currentTeam.length} players):</div>
-                    {currentTeam.length > 0 ? (
-                        currentTeam.map((player, idx) => (
-                            <div key={idx}>
-                                {idx + 1}. {player.name} ({player.position}) - {player.cost} pts
-                            </div>
-                        ))
-                    ) : (
-                        <div>No players selected yet</div>
-                    )}
+          <div className='status-container team-container'>
+                <div style={{ fontWeight: 'bold', marginBottom: '10px', fontSize: '1.1rem' }}>
+                    Your Team:
+                </div>
+                <div className="team-slots">
+                {[...Array(10)].map((_, idx) => {
+                const player = currentTeam[idx];
+                return (
+                    <span key={idx} className={player ? 'team-slot filled' : 'team-slot empty'}>
+                        {player ? player.name : `Player ${idx + 1}`}
+                        {idx < 9 && <span className="separator"> | </span>}
+                    </span>
+                );
+            })}
             </div>
         </div>
 
@@ -147,19 +153,10 @@ function UserChoice(){
 
                 <div className='athletes-list flex'>
                     {availablePlayers.map((athlete) => (
-                    <div 
+                   <div 
                         key={athlete.id} 
+                        className={`player-row ${selectedAthlete?.id === athlete.id ? 'selected' : ''}`}
                         onClick={() => handlePlayerClick(athlete)}
-                        style={{
-                            display: 'grid',
-                            gridTemplateColumns: '2fr 1fr 2fr 1fr',
-                            padding: '10px',
-                            cursor: 'pointer',
-                            backgroundColor: selectedAthlete?.id === athlete.id ? '#f4a460' : 'transparent',
-                            borderRadius: '5px',
-                            marginBottom: '5px',
-                            border: selectedAthlete?.id === athlete.id ? '2px solid #d4941f' : 'none'
-                        }}
                     >
                         <div>{athlete.name}</div>
                         <div>{athlete.position}</div>
