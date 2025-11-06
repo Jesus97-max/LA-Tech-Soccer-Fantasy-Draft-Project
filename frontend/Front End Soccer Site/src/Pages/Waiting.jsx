@@ -41,7 +41,7 @@ useEffect(function(){
             // If its the users turn, change the subtitle
             setSubtitle("Time to Choose Your Athlete!");  
         }
-    }, 1000);
+    }, 4000);
 
 
     // use clearTimeout to avoid errors
