@@ -1,7 +1,9 @@
 import express from "express";
+import cors from "cors";
 import draftRouter from "./routes/draft";
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 // Use the PORT Amplify gives us (fallback 3000 for local dev)
