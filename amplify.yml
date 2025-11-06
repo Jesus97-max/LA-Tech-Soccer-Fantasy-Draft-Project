@@ -1,7 +1,7 @@
 # ==============================================
 # AWS Amplify Build Configuration (monorepo)
 # Frontend: Vite -> dist
-# Backend: Express/TypeScript server on Node 20
+# Backend: Express/TypeScript server on Node 20 + Python FastAPI Lambda
 # ==============================================
 
 version: 1
@@ -17,9 +17,35 @@ applications:
           commands:
             - npm run build
       artifacts:
-        baseDirectory: dist        # Vite output confirmed
+        baseDirectory: dist # Vite output confirmed
         files:
-          - '**/*'
+          - "**/*"
       cache:
         paths:
           - node_modules/**/*
+
+  # ---------- BACKEND ----------
+  - appRoot: amplify
+    backend:
+      phases:
+        preBuild:
+          commands:
+            - echo "Starting Amplify backend pre-build..."
+            - pip install --upgrade pip
+        build:
+          commands:
+            - echo "Building backend resources..."
+            # Install Python dependencies for your FastAPI Lambda
+            - cd backend/function/championLeagueApiFunction/src
+            - echo "Installing Python dependencies for championLeagueApiFunction..."
+            - pip install -r requirements.txt -t .
+            - echo "Python dependencies installed successfully!"
+            - cd ../../../../..
+            # Build and push Amplify backend
+            - amplifyPush --simple
+      artifacts:
+        baseDirectory: build
+        files:
+          - "**/*"
+      cache:
+        paths: []
