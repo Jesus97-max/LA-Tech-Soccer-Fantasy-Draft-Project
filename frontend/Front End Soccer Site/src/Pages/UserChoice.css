@@ -25,18 +25,7 @@ body {
   left: 0;
 }
 
-.athletes-container{
-  background-color: #DDDBF1; /* light blue */
-  color: #496b94;
-  padding: 1.5rem;
-  border-radius: 0.75rem;
-  max-width: 90%;
-  margin-top: 1.5rem;
-  margin-bottom: 2rem;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
+
 .status-container{
   background-color:#DDDBF1; /* light blue */
   color: #3C4F76;
@@ -49,20 +38,40 @@ body {
   justify-content: space-between;
   align-items: center;
 }
+.athletes-container {
+  background-color: #DDDBF1;
+  color: #090e6baa;
+  border-radius: 0.75rem;
+  max-width: 90%;
+  margin: 1.5rem auto 2rem auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;  /* Prevent overflow issues */
+  padding: 1.5rem;
+}
 
-.athletes-header{
-  display: flex;
-  justify-content: space-between; 
-  align-items: center; 
+/* Athletes table header */
+.athletes-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr 1fr;
+  font-weight: bold;
+  font-size: 1rem;
+  border-bottom: 2px;
   padding: 10px;
-}
-.athletes-list{
-  display: flex;
-  flex-direction: column; 
-  justify-content: space-between; 
-  gap: 20px; 
+  background-color: #DDDBF1;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
+/* Athletes list - scrollable area */
+.athletes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 0 1.5rem 1.5rem 1.5rem;  /* Add padding here instead */
+}
 .player-row {
   display: grid;
   grid-template-columns: 2fr 1fr 2fr 1fr;
@@ -111,4 +120,24 @@ body {
 .separator {
   color: #5d6a8e;
   margin: 0 5px;
+}
+
+
+/* Custom scrollbar styling for athletes list */
+.athletes-list::-webkit-scrollbar {
+  width: 10px;
+}
+
+.athletes-list::-webkit-scrollbar-track {
+  background: #c8c8e8;
+  border-radius: 10px;
+}
+
+.athletes-list::-webkit-scrollbar-thumb {
+  background: #48689C ;/* Blue color matching your theme */
+  border-radius: 10px;
+}
+
+.athletes-list::-webkit-scrollbar-thumb:hover {
+  background: #2d4667;  /* Darker blue on hover */
 }

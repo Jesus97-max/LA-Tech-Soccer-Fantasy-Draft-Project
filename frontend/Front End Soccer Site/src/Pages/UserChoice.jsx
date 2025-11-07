@@ -1,46 +1,49 @@
 import { useState, useEffect } from 'react';
-//import { playerList, athleteList, roundCounter, selected } from "../global.js";
+import { useNavigate } from 'react-router-dom';
 import './userchoice.css';
 const API_URL = 'http://localhost:3000/draft';
 
 function UserChoice(){
 
+
+    const navigate = useNavigate();
     const [selectedAthlete, setSelectedAthlete] = useState(null);
     const [availablePlayers, setAvailablePlayers] = useState([]);
     const [currentRound, setCurrentRound] = useState(1);
     const [pointsLeft, setPointsLeft] = useState(100);
     const [currentTeam, setCurrentTeam] = useState([]);
     const [currentParticipant, setCurrentParticipant] = useState(null);
+    const [myParticipantId] = useState("user1");
 
     // useEffect( () => {
     //     fetchDraftState();
     // }, []);
     
     useEffect(() => {
-        initializeDraft();
+       fetchDraftState();
     }, []);
 
     // Initialize the draft with participants
-    const initializeDraft = async () => {
-        try {
-            const resetResponse = await fetch(`${API_URL}/reset`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    participants: [
-                        { participantId: "user1", teamId: "team1", order: 0, team: [] },
-                        { participantId: "user2", teamId: "team2", order: 1, team: [] }
-                    ]
-                })
-            });
+    // const initializeDraft = async () => {
+    //     try {
+    //         const resetResponse = await fetch(`${API_URL}/reset`, {
+    //             method: 'POST',
+    //             headers: { 'Content-Type': 'application/json' },
+    //             body: JSON.stringify({
+    //                 participants: [
+    //                     { participantId: "user1", teamId: "team1", order: 0, team: [] },
+    //                     { participantId: "user2", teamId: "team2", order: 1, team: [] }
+    //                 ]
+    //             })
+    //         });
             
-            if (resetResponse.ok) {
-                fetchDraftState();
-            }
-        } catch (error) {
-            console.error('Error initializing draft:', error);
-        }
-    };
+    //         if (resetResponse.ok) {
+    //             fetchDraftState();
+    //         }
+    //     } catch (error) {
+    //         console.error('Error initializing draft:', error);
+    //     }
+    // };
 
     const fetchDraftState = async () => {
         try {
@@ -51,22 +54,34 @@ function UserChoice(){
             
             setCurrentRound(data.currentRound);
             
-            // Get current participant
-            const participant = data.participants[data.currentParticipantIndex];
-            setCurrentParticipant(participant);
-            setCurrentTeam(participant.team);
+
+            //const currentTurnParticipant = data.participants[data.currentParticipantIndex];
+          //  setIsMyTurn(currentTurnParticipant.participantId === myParticipantId);
             
-            // Calculate points left
-            const usedPoints = participant.team.reduce((sum, player) => sum + player.cost, 0);
-            setPointsLeft(100 - usedPoints);
+            const myParticipant = data.participants.find(p => p.participantId === myParticipantId);
+            
+            if (myParticipant) {
+                setCurrentParticipant(myParticipant);
+                setCurrentTeam(myParticipant.team);
+                
+                // Calculate points left for MY team
+                const usedPoints = myParticipant.team.reduce((sum, player) => sum + player.cost, 0);
+                setPointsLeft(100 - usedPoints);
+            }
+
+            // Get current participant
+            // const participant = data.participants[data.currentParticipantIndex];
+            // setCurrentParticipant(participant);
+            // setCurrentTeam(participant.team);
+            
             
             // Get available players (not picked yet)
             const selectedIds = Array.isArray(data.selectedPlayerIds) 
-            ? data.selectedPlayerIds 
-            : Array.from(data.selectedPlayerIds || []);
+                ? data.selectedPlayerIds 
+                : Array.from(data.selectedPlayerIds || []);
 
             const available = data.availablePlayers.filter(
-            player => !selectedIds.includes(String(player.id))
+                player => !selectedIds.includes(String(player.id))
             );
 
             setAvailablePlayers(available);
@@ -101,9 +116,21 @@ function UserChoice(){
             const result = await response.json();
             
             if (result.ok) {
-                alert(result.message);
                 setSelectedAthlete(null);
-                fetchDraftState(); // Refresh the state
+               // navigate('/waiting');
+                
+                const stateResponse = await fetch(`${API_URL}/state`);
+                const draftState = await stateResponse.json();
+                
+                const myParticipant = draftState.participants.find(p => p.participantId === myParticipantId);
+                
+                // Check if my team is complete (10 players)
+                if (myParticipant && myParticipant.team.length >= 10) {
+                    navigate('/display');
+                } else {
+                    navigate('/waiting');
+                }
+
             } else {
                 alert(result.message || 'Failed to pick player');
             }
@@ -124,24 +151,23 @@ function UserChoice(){
                 </div>
             </div>
 
-          <div className='status-container team-container'>
-                <div style={{ fontWeight: 'bold', marginBottom: '10px', fontSize: '1.1rem' }}>
+           <div className='status-container team-container'>
+              <div style={{ fontWeight: 'bold', marginBottom: '10px', fontSize: '1.1rem' }}>
                     Your Team:
                 </div>
+                
                 <div className="team-slots">
-                {[...Array(10)].map((_, idx) => {
-                const player = currentTeam[idx];
-                return (
-                    <span key={idx} className={player ? 'team-slot filled' : 'team-slot empty'}>
-                        {player ? player.name : `Player ${idx + 1}`}
-                        {idx < 9 && <span className="separator"> | </span>}
-                    </span>
-                );
-            })}
+                    {[...Array(10)].map((_, idx) => {
+                        const player = currentTeam[idx];
+                        return (
+                            <span key={idx} className={player ? 'team-slot filled' : 'team-slot empty'}>
+                                {player ? player.name : `Player ${idx + 1}`}
+                                {idx < 9 && <span className="separator"> | </span>}
+                            </span>
+                        );
+                    })}
+                </div>
             </div>
-        </div>
-
-            <h2>Available Athletes</h2>
             
             <div className='athletes-container'>
                 <div className='athletes-header'>
@@ -171,7 +197,7 @@ function UserChoice(){
 
             <div style={{ overflow: 'hidden' }}>
                 <button 
-                    style={{ float: 'right', marginRight: '20px' }}
+                    style={{ float: 'right', marginRight: '2.5rem' ,  margin: '2rem auto 2rem auto' }}
                     onClick={handleSelect}
                 >
                     Select
