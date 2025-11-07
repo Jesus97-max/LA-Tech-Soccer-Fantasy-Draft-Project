@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap');
+/* 
+#root{
+  --blue-dark:#496b94;    
+  --blue-mid:#3f5f88;     
+  --blue-shadow:#2d4667;  
+  --oval:#e8eaf6;         
+  --text-dark:#2e4059;    
+  --accent:#f2c84b;      
+} */
+
+body {
+  font-family: 'Kanit', sans-serif;
+
+}
+.player-select-page {
+  background-color: #48689C;
+  color: white;
+  border-radius: 0;
+  width: 100%;
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
+.status-container{
+  background-color:#DDDBF1; /* light blue */
+  color: #3C4F76;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  max-width: 90%;
+  margin: 1.5rem auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.athletes-container {
+  background-color: #DDDBF1;
+  color: #090e6baa;
+  border-radius: 0.75rem;
+  max-width: 90%;
+  margin: 1.5rem auto 2rem auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;  /* Prevent overflow issues */
+  padding: 1.5rem;
+}
+
+/* Athletes table header */
+.athletes-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr 1fr;
+  font-weight: bold;
+  font-size: 1rem;
+  border-bottom: 2px;
+  padding: 10px;
+  background-color: #DDDBF1;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Athletes list - scrollable area */
+.athletes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 0 1.5rem 1.5rem 1.5rem;  /* Add padding here instead */
+}
+.player-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr 1fr;
+  padding: 12px;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  margin-bottom: 8px;
+  transition: all 0.2s ease;
+  background-color: transparent;
+}
+
+.player-row:hover {
+  background-color: rgba(244, 164, 96, 0.2);
+}
+
+.player-row.selected {
+  background-color: #f4a460;
+  border: 2px solid #3C4F76;  /* Blue outline! */
+  color: white;
+}
+
+.team-slots {
+  color: #5d6a8e;
+  font-size: 0.95rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
+}
+
+.team-slot {
+  display: inline;
+}
+
+.team-slot.filled {
+  color: #3C4F76;
+  font-weight: 600;
+}
+
+.team-slot.empty {
+  color: #8a8aaa;
+  font-style: italic;
+}
+
+.separator {
+  color: #5d6a8e;
+  margin: 0 5px;
+}
+
+
+/* Custom scrollbar styling for athletes list */
+.athletes-list::-webkit-scrollbar {
+  width: 10px;
+}
+
+.athletes-list::-webkit-scrollbar-track {
+  background: #c8c8e8;
+  border-radius: 10px;
+}
+
+.athletes-list::-webkit-scrollbar-thumb {
+  background: #48689C ;/* Blue color matching your theme */
+  border-radius: 10px;
+}
+
+.athletes-list::-webkit-scrollbar-thumb:hover {
+  background: #2d4667;  /* Darker blue on hover */
+}
