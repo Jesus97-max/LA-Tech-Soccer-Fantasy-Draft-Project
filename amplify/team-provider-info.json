@@ -15,7 +15,7 @@
       "function": {
         "championLeagueApiFunction": {
           "deploymentBucketName": "amplify-latechsoccerfantasyd-dev-10686-deployment",
-          "s3Key": "amplify-builds/championLeagueApiFunction-597264336b304c62434c-build.zip"
+          "s3Key": "amplify-builds/championLeagueApiFunction-3651796e35304c554b55-build.zip"
         },
         "backendNodeFunction": {
           "deploymentBucketName": "amplify-latechsoccerfantasyd-dev-10686-deployment",

@@ -5,7 +5,7 @@
     "CloudWatchRule": {
       "Type": "String",
       "Default": "NONE",
-      "Description": " Schedule Expression"
+      "Description": "Schedule Expression"
     },
     "deploymentBucketName": {
       "Type": "String"
@@ -43,7 +43,10 @@
             "Ref": "s3Key"
           }
         },
-        "Handler": "index.handler",
+        "Handler": "main.handler",
+        "Runtime": "python3.11",
+        "MemorySize": 256,
+        "Timeout": 25,
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
@@ -69,18 +72,14 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
-            }
+            },
+            "DEBUG": "true"
           }
         },
         "Role": {
-          "Fn::GetAtt": [
-            "LambdaExecutionRole",
-            "Arn"
-          ]
+          "Fn::GetAtt": ["LambdaExecutionRole", "Arn"]
         },
-        "Runtime": "python3.8",
-        "Layers": [],
-        "Timeout": 25
+        "Layers": []
       }
     },
     "LambdaExecutionRole": {
@@ -110,22 +109,16 @@
             {
               "Effect": "Allow",
               "Principal": {
-                "Service": [
-                  "lambda.amazonaws.com"
-                ]
+                "Service": ["lambda.amazonaws.com"]
               },
-              "Action": [
-                "sts:AssumeRole"
-              ]
+              "Action": ["sts:AssumeRole"]
             }
           ]
         }
       }
     },
     "lambdaexecutionpolicy": {
-      "DependsOn": [
-        "LambdaExecutionRole"
-      ],
+      "DependsOn": ["LambdaExecutionRole"],
       "Type": "AWS::IAM::Policy",
       "Properties": {
         "PolicyName": "lambda-execution-policy",
@@ -174,10 +167,7 @@
     },
     "Arn": {
       "Value": {
-        "Fn::GetAtt": [
-          "LambdaFunction",
-          "Arn"
-        ]
+        "Fn::GetAtt": ["LambdaFunction", "Arn"]
       }
     },
     "Region": {
@@ -192,10 +182,7 @@
     },
     "LambdaExecutionRoleArn": {
       "Value": {
-        "Fn::GetAtt": [
-          "LambdaExecutionRole",
-          "Arn"
-        ]
+        "Fn::GetAtt": ["LambdaExecutionRole", "Arn"]
       }
     }
   }
