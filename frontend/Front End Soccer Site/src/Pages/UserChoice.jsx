@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Userchoice.css';
+import './UserChoice.css';
 const API_URL = 'http://localhost:3000/draft';
 
 function UserChoice(){
