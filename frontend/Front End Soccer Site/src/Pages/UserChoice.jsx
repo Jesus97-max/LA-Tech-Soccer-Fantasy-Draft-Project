@@ -5,7 +5,6 @@ const API_URL = 'http://localhost:3000/draft';
 
 function UserChoice(){
 
-
     const navigate = useNavigate();
     const [selectedAthlete, setSelectedAthlete] = useState(null);
     const [availablePlayers, setAvailablePlayers] = useState([]);
@@ -15,48 +14,87 @@ function UserChoice(){
     const [currentParticipant, setCurrentParticipant] = useState(null);
     const [myParticipantId] = useState("user1");
 
-    // useEffect( () => {
-    //     fetchDraftState();
-    // }, []);
-    
     useEffect(() => {
-       fetchDraftState();
+        check_InitializedDraft(); 
     }, []);
 
-    // Initialize the draft with participants
-    // const initializeDraft = async () => {
-    //     try {
-    //         const resetResponse = await fetch(`${API_URL}/reset`, {
-    //             method: 'POST',
-    //             headers: { 'Content-Type': 'application/json' },
-    //             body: JSON.stringify({
-    //                 participants: [
-    //                     { participantId: "user1", teamId: "team1", order: 0, team: [] },
-    //                     { participantId: "user2", teamId: "team2", order: 1, team: [] }
-    //                 ]
-    //             })
-    //         });
+    // Add another useEffect to refresh when component is visible
+    useEffect(() => {
+        // Refresh state when returning to this page
+        const handleFocus = () => {
+            console.log('Page visible, refreshing state...');
+            fetchDraftState();
+        };
+
+        window.addEventListener('focus', handleFocus);
+        
+        // Also refresh when the page is shown (browser back/forward)
+        window.addEventListener('pageshow', handleFocus);
+
+        return () => {
+            window.removeEventListener('focus', handleFocus);
+            window.removeEventListener('pageshow', handleFocus);
+        };
+    }, []);
+
+
+    // this checks if draft has been initializes and only init if needed
+    const check_InitializedDraft = async () => { 
+        try{    
+            const response = await fetch(`${API_URL}/state`);
+            const data = await response.json(); 
+
+            console.log('draft state check: ', data);
+
+            if(!data.availablePlayers || data.availablePlayers.length === 0){
+                console.log('No players found, initializing draft...');
+                await initializeDraft();
+            } else {
+                // Draft already initialized, just fetch state
+                await fetchDraftState();
+            }
             
-    //         if (resetResponse.ok) {
-    //             fetchDraftState();
-    //         }
-    //     } catch (error) {
-    //         console.error('Error initializing draft:', error);
-    //     }
-    // };
+
+        } catch (error ){
+            console.error('Error checking draft state:', error);
+            await initializeDraft();
+        }
+    };
+
+    const initializeDraft = async () => {
+        try {
+            const resetResponse = await fetch(`${API_URL}/reset`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    participants: [
+                        { participantId: "user1", teamId: "team1", order: 0, team: [] },
+                        { participantId: "user2", teamId: "team2", order: 1, team: [] }
+                    ]
+                })
+            });
+            
+            if (resetResponse.ok) {
+                console.log('Draft initialized successfully');
+                await fetchDraftState();
+            }
+        } catch (error) {
+            console.error('Error initializing draft:', error);
+        }
+    };
 
     const fetchDraftState = async () => {
         try {
             const response = await fetch(`${API_URL}/state`);
             const data = await response.json();
-
-            console.log('Draft state:', data); // Debug log
+            
+            
+            console.log('Fetched draft state:', data);
+            console.log('Available players:', data.availablePlayers?.length);
+            console.log('My team:', data.participants.find(p => p.participantId === myParticipantId)?.team);
+            
             
             setCurrentRound(data.currentRound);
-            
-
-            //const currentTurnParticipant = data.participants[data.currentParticipantIndex];
-          //  setIsMyTurn(currentTurnParticipant.participantId === myParticipantId);
             
             const myParticipant = data.participants.find(p => p.participantId === myParticipantId);
             
@@ -67,23 +105,20 @@ function UserChoice(){
                 // Calculate points left for MY team
                 const usedPoints = myParticipant.team.reduce((sum, player) => sum + player.cost, 0);
                 setPointsLeft(100 - usedPoints);
-            }
-
-            // Get current participant
-            // const participant = data.participants[data.currentParticipantIndex];
-            // setCurrentParticipant(participant);
-            // setCurrentTeam(participant.team);
-            
+            }    
             
             // Get available players (not picked yet)
             const selectedIds = Array.isArray(data.selectedPlayerIds) 
                 ? data.selectedPlayerIds 
                 : Array.from(data.selectedPlayerIds || []);
 
+            console.log('Selected IDs after conversion:', selectedIds);
+
             const available = data.availablePlayers.filter(
                 player => !selectedIds.includes(String(player.id))
             );
 
+            console.log('Filtered available players:', available);
             setAvailablePlayers(available);
             
         } catch (error) {
@@ -117,16 +152,15 @@ function UserChoice(){
             
             if (result.ok) {
                 setSelectedAthlete(null);
-               // navigate('/waiting');
                 
                 const stateResponse = await fetch(`${API_URL}/state`);
                 const draftState = await stateResponse.json();
                 
                 const myParticipant = draftState.participants.find(p => p.participantId === myParticipantId);
                 
-                // Check if my team is complete (10 players)
-                if (myParticipant && myParticipant.team.length >= 10) {
-                    navigate('/display');
+                // Check if my team is complete (5 players)
+                if (myParticipant && myParticipant.team.length >= 5) {
+                    navigate('/teamdisplay');
                 } else {
                     navigate('/waiting');
                 }
@@ -157,12 +191,12 @@ function UserChoice(){
                 </div>
                 
                 <div className="team-slots">
-                    {[...Array(10)].map((_, idx) => {
+                    {[...Array(5)].map((_, idx) => {
                         const player = currentTeam[idx];
                         return (
                             <span key={idx} className={player ? 'team-slot filled' : 'team-slot empty'}>
                                 {player ? player.name : `Player ${idx + 1}`}
-                                {idx < 9 && <span className="separator"> | </span>}
+                                {idx < 4 && <span className="separator"> | </span>}
                             </span>
                         );
                     })}
@@ -197,13 +231,12 @@ function UserChoice(){
 
             <div style={{ overflow: 'hidden' }}>
                 <button 
-                    style={{ float: 'right', marginRight: '2.5rem' ,  margin: '2rem auto 2rem auto' }}
+                    style={{ float: 'right', marginRight: '3rem' ,  margin: '2rem auto 2rem auto' }}
                     onClick={handleSelect}
                 >
                     Select
                 </button>
             </div>
-
 
         </div>
     ); 
