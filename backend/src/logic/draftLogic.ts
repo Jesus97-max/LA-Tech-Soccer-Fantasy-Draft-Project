@@ -32,7 +32,7 @@ let draftGameState: DraftGameState = {
   currentParticipantIndex: 0,
   participants: [
     { participantId: "user1", teamId: "team1", order: 0, team: [] },
-    { participantId: "user2", teamId: "team2", order: 1, team: [] },
+    //{ participantId: "user2", teamId: "team2", order: 1, team: [] },
   ],
   selectedPlayerIds: new Set<string>(),
   availablePlayers: [],

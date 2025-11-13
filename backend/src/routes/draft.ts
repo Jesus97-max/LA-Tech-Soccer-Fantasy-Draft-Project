@@ -32,7 +32,7 @@ router.post("/pick", (req, res) => {
   const { playerId } = req.body || {};
   const result = pickPlayer(playerId);
   if (!result.success) return res.status(400).json(result);
-  moveToNextTurn();
+  //moveToNextTurn();  commenting out, because we are one player atm
   return res.json({ ok: true, message: result.message, state: getDraftState() });
 });
 

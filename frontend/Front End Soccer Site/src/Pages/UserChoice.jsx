@@ -158,8 +158,8 @@ function UserChoice(){
                 
                 const myParticipant = draftState.participants.find(p => p.participantId === myParticipantId);
                 
-                // Check if my team is complete (5 players)
-                if (myParticipant && myParticipant.team.length >= 5) {
+                // END GAME AFTER 2 rounds
+                if (myParticipant && myParticipant.team.length >= 2) {
                     navigate('/teamdisplay');
                 } else {
                     navigate('/waiting');
