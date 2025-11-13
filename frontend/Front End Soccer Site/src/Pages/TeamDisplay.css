@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Kanit', sans-serif;
+}
+
+.team-display-page {
+    background-color: #48689C; /* Same blue background as UserChoice */
+    color: white;
+    min-height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 2rem;
+    overflow-x: hidden;
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    color: white;
+    font-weight: 600;
+}
+
+.teams-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
+    gap: 1.5rem; /* Slightly smaller gap to fit better */
+    max-width: 95%; /* Use more width */
+    margin: 0 auto;
+}
+
+.team-card {
+    background-color: #DDDBF1; /* Same light blue as status containers */
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.team-name {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #3C4F76; /* Dark blue */
+    border-bottom: 3px solid #f4a460; /* Orange accent! */
+    padding-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.team-stats {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: rgba(244, 164, 96, 0.1); /* Light orange background */
+    border-radius: 0.5rem;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #5d6a8e;
+    margin-bottom: 0.25rem;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #f4a460; /* Orange! */
+}
+
+.players-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.player-card {
+    display: flex;
+    align-items: center;
+    background-color: #3C4F76; /* Dark blue background */
+    padding: 1rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+}
+
+.player-card:hover {
+    transform: translateX(5px);
+    border: 2px solid #f4a460; /* Orange border on hover */
+    background-color: #48689C;
+}
+
+.player-number {
+    width: 35px;
+    height: 35px;
+    background: #f4a460; /* Orange circle! */
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 1rem;
+    font-size: 1.1rem;
+}
+
+.player-info {
+    flex: 1;
+}
+
+.player-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white; /* White player names! */
+    margin-bottom: 0.25rem;
+}
+
+.player-details {
+    font-size: 0.9rem;
+    color: #DDDBF1; /* Light blue for details */
+}
+
+.no-players {
+    text-align: center;
+    padding: 2rem;
+    color: #8a8aaa;
+    font-style: italic;
+}
